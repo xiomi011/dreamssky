@@ -55,20 +55,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fadeEls.forEach(el => observer.observe(el));
 
-    // Hero particles
+    // Hero particles with varied colors
     const particlesContainer = document.getElementById('particles');
-    const particleCount = 30;
+    const particleCount = 45;
+    const colors = [
+        'rgba(0, 200, 255, 0.5)',
+        'rgba(120, 0, 255, 0.45)',
+        'rgba(255, 50, 100, 0.4)',
+        'rgba(0, 255, 170, 0.35)',
+        'rgba(251, 191, 36, 0.35)',
+        'rgba(99, 102, 241, 0.45)',
+    ];
 
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.classList.add('particle');
         particle.style.left = Math.random() * 100 + '%';
-        particle.style.width = particle.style.height = (Math.random() * 3 + 1) + 'px';
-        particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
-        particle.style.animationDelay = (Math.random() * 10) + 's';
-        particle.style.background = Math.random() > 0.5
-            ? 'rgba(233, 69, 96, 0.4)'
-            : 'rgba(83, 52, 131, 0.5)';
+        const size = Math.random() * 4 + 1;
+        particle.style.width = particle.style.height = size + 'px';
+        particle.style.animationDuration = (Math.random() * 18 + 8) + 's';
+        particle.style.animationDelay = (Math.random() * 12) + 's';
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+        if (size > 3) particle.style.filter = 'blur(1px)';
         particlesContainer.appendChild(particle);
     }
 
